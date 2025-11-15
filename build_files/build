@@ -15,7 +15,8 @@ apt-get install -y \
 	linux-image-surface \
 	linux-headers-surface \
 	libwacom-surface \
-	iptsd
+	iptsd \
+	mokutil
 
 # Build Initramfs
 KERNEL_VERSION="$(basename "$(find /usr/lib/modules -maxdepth 1 -type d | grep -v -E "*.img" | tail -n 1)")"
