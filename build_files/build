@@ -11,6 +11,8 @@ echo "deb [arch=amd64] https://pkg.surfacelinux.com/debian release main" \
 apt-get update -y
 
 # Install Surface Bits
+apt-get purge -y \
+	"linux-image-$(dpkg --print-architecture)"
 apt-get install -y \
 	linux-image-surface \
 	linux-headers-surface \
@@ -21,6 +23,10 @@ apt-get install -y \
 KERNEL_VERSION="$(basename "$(find /usr/lib/modules -maxdepth 1 -type d | grep -v -E "*.img" | tail -n 1)")"
 dracut --force --no-hostonly --reproducible --zstd --verbose \
   --kver "$KERNEL_VERSION" "/usr/lib/modules/$KERNEL_VERSION/initramfs.img"
+
+# Clean up /boot
+rm -f /boot/* || true
+rm -f /boot/.* || true
 
 apt list --installed > /usr/share/snow/snowfield.packages.txt
 
