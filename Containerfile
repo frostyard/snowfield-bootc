@@ -3,7 +3,7 @@ FROM scratch AS ctx
 COPY build_files /
 
 # Base Image
-FROM ghcr.io/frostyard/snow:latest
+FROM ghcr.io/frostyard/snow-bootc:latest
 
 ARG DEBIAN_FRONTEND=noninteractive
 ARG BUILD_ID=${BUILD_ID}
